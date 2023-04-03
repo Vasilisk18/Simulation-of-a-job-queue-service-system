@@ -1,4 +1,4 @@
-﻿#ifndef Tree_H
+#ifndef Tree_H
 #define Tree_H
 
 #include <utility>
@@ -103,6 +103,20 @@ public:
 	{
 		return _existsKey(root, te);
 	}
+
+	// Получение значения по ключу
+	TableElement get(const std::string& key)
+	{
+		// Ищем элемент по ключу
+		auto result = find(TableElement(key, Polynomial()));
+		// Если элемент найден, возвращаем его значение
+		if (result.first != nullptr)
+			return result.first->data;
+		// Иначе возвращаем пустой элемент
+		else
+			return TableElement();
+	}
+
 };
 
 #endif // !Tree_H
