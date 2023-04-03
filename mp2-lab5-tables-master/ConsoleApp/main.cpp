@@ -1,4 +1,4 @@
-﻿#include "polynomial.h"
+#include "polynomial.h"
 #include "hashtable.h"
 #include "orderedtable.h"
 #include "LineTable.h"
@@ -25,7 +25,7 @@ int main()
 		= new HashTable<std::string, Polynomial, KeyHash>();
 	OrderedTable *ot = new OrderedTable();
 	LineTable *ut = new LineTable();
-	Tree *tt = new Tree();
+	Tree<std::string, Polynomial>* tt = new Tree<std::string, Polynomial>();
 
 	while (true)
 	{
@@ -46,9 +46,11 @@ int main()
 				std::cin >> key;
 				if (!ht->get(key, p))
 					continue;
+				if (!tt->existsKey(key)) {
+					std::cout << "Такого ключа в дереве нет!" << std::endl;
+					continue;
 				ot->get(key);
 				ut->get(key);
-				tt->get(key);
 			}
 			else 
 				p = Polynomial(s1);
@@ -131,6 +133,11 @@ int main()
 											ut->add(*te);
 										else
 											std::cout << "Такой ключ в линейной таблице уже существует!" << std::endl;
+
+										if (!tt->existsKey(key))
+											tt->insert(key, p);
+										else
+											std::cout << "Такой ключ в дереве уже существует!" << std::endl;
 									}
 
 									break;
@@ -226,4 +233,7 @@ int main()
 			std::cout << "Неверный формат ввода! Повторите ввод." << std::endl;
 		}
 	}
+	delete ht;
+	delete ot;
+	delete ut;
 }
