@@ -1,7 +1,7 @@
-﻿#ifndef HASHTABLE_H
+#ifndef HASHTABLE_H
 #define HASHTABLE_H
 
-#include "hashnode.h"
+#include "hashNode.h"
 #include <sstream>
 
 // Константа размера хэш-таблицы
@@ -95,6 +95,43 @@ public:
 
 		std::cout << "Хэш-таблица - операций добавления: "
 			<< count << std::endl;
+	}
+	//Метод удаления по ключу
+	void remove(const K& key)
+	{
+		// Вычисление хэш-значения
+		unsigned long hashValue = function(key);
+		HashNode<K, V>* prev = nullptr;
+		HashNode<K, V>* entry = table[hashValue];
+
+		// Поиск узла с указанным ключом
+		while (entry && entry->key() != key)
+		{
+			prev = entry;
+			entry = entry->next();
+		}
+
+		if (!entry)
+		{
+			// Узел с указанным ключом не найден
+			std::cout << "Узел с ключом " << key << " не найден." << std::endl;
+			return;
+		}
+
+		// Если узел найден, удаляем его из таблицы
+		if (prev == nullptr)
+		{
+			// Узел находится в начале списка
+			table[hashValue] = entry->next();
+		}
+		else
+		{
+			// Узел находится в середине или конце списка
+			prev->setNext(entry->next());
+		}
+
+		delete entry;
+		std::cout << "Узел с ключом " << key << " удален из хэш-таблицы." << std::endl;
 	}
 };
 
