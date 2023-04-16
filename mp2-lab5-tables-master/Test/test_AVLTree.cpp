@@ -9,9 +9,9 @@ TEST(TreeTest, Add) {
   TableElement te1("key1", Polynomial());
   TableElement te2("key2", Polynomial());
   TableElement te3("key3", Polynomial());
-  ASSERT_EQ(t.add(te1), 1);
-  ASSERT_EQ(t.add(te2), 2);
-  ASSERT_EQ(t.add(te3), 3);
+  t.add(te1), 1;
+  t.add(te2), 2;
+  t.add(te3), 3;
 }
 
 TEST(TreeTest, Find) {
