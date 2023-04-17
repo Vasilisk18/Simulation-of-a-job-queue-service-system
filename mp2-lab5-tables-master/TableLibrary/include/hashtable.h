@@ -55,13 +55,13 @@ public:
 			if (entry->key() == key) // Если найдена запись
 			{
 				value = entry->value();
-				std::cout << "Хэш-таблица - операций поиска: " << count << std::endl;
+				std::cout << "Hash Table - search operations: " << count << std::endl;
 				return true;
 			}
 			entry = entry->next();
 		}
 
-		std::cout << "Полином с таким ключом не найден\n";
+		std::cout << "Polynomial with such key was not found\n";
 		return false;
 	}
 
@@ -93,7 +93,7 @@ public:
 		else
 			entry->setValue(value);
 
-		std::cout << "Хэш-таблица - операций добавления: "
+		std::cout << "Hash Table - Add operations: "
 			<< count << std::endl;
 	}
 	//Метод удаления по ключу
@@ -114,7 +114,7 @@ public:
 		if (!entry)
 		{
 			// Узел с указанным ключом не найден
-			std::cout << "Узел с ключом " << key << " не найден." << std::endl;
+			std::cout << "Node with key" << key << " not found." << std::endl;
 			return;
 		}
 
@@ -131,7 +131,7 @@ public:
 		}
 
 		delete entry;
-		std::cout << "Узел с ключом " << key << " удален из хэш-таблицы." << std::endl;
+		std::cout << "Node with key" << key << "removed from hash table" << std::endl;
 	}
 };
 
