@@ -25,7 +25,7 @@ int main()
 		= new HashTable<std::string, Polynomial, KeyHash>();
 	OrderedTable *ot = new OrderedTable();
 	LineTable *ut = new LineTable();
-	Tree<std::string, Polynomial>* tt = new Tree<std::string, Polynomial>();
+	Tree* tt = new Tree();
 
 	while (true)
 	{
@@ -46,11 +46,9 @@ int main()
 				std::cin >> key;
 				if (!ht->get(key, p))
 					continue;
-				if (!tt->existsKey(key)) {
-					std::cout << "Такого ключа в дереве нет!" << std::endl;
-					continue;
 				ot->get(key);
 				ut->get(key);
+				tt->get(key);
 			}
 			else 
 				p = Polynomial(s1);
@@ -134,8 +132,8 @@ int main()
 										else
 											std::cout << "Такой ключ в линейной таблице уже существует!" << std::endl;
 
-										if (!tt->existsKey(key))
-											tt->insert(key, p);
+										if (!tt->existsKey(*te))
+											tt->add(*te);
 										else
 											std::cout << "Такой ключ в дереве уже существует!" << std::endl;
 									}
@@ -184,6 +182,7 @@ int main()
 										ht->add(te->key(), te->value());
 										ot->add(*te);
 										ut->add(*te);
+										tt->add(*te);
 									}
 
 									break;
@@ -217,13 +216,18 @@ int main()
 								ut->add(*te);
 							else
 								std::cout << "Такой ключ в линейной таблице уже существует!" << std::endl;
+
+							if (!tt->existsKey(*te))
+								tt->add(*te);
+							else
+								std::cout << "Такой ключ в дереве уже существует!" << std::endl;
 						}
 						break;
 					}
 				}
 				catch (std::exception&)
 				{
-					std::cout << "Введите число от 0 до 3!" << std::endl;
+					std::cout << "Введите число от 0 до 5" << std::endl;
 					std::cin.clear();
 				}
 			}
@@ -236,4 +240,5 @@ int main()
 	delete ht;
 	delete ot;
 	delete ut;
+	delete tt;
 }
