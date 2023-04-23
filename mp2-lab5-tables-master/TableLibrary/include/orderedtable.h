@@ -1,4 +1,4 @@
-﻿#ifndef ORDERED_TABLE_H
+#ifndef ORDERED_TABLE_H
 #define ORDERED_TABLE_H
 
 #include "../include/tableelement.h"
@@ -27,6 +27,8 @@ public:
 	{
 		int count = table->add(TableElement(key, p));
 		std::cout << "Упорядоченная таблица - операций добавления: "
+			<< count << std::endl;
+		std::cout << "Таблица Дерево - операций добавления: "
 			<< count << std::endl;
 	}
 
